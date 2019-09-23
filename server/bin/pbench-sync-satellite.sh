@@ -266,6 +266,13 @@ if [ -s ${state_change_log} ] ;then
     fi
 fi
 
+if [ $nerrs == 0 ] ; then
+    for entry in "${logdir_for_remote}"/*
+    do
+        rm -rf $entry
+    done
+fi
+
 let end_time=$(timestamp-seconds-since-epoch)
 let duration=end_time-start_time
 echo "$TS: end - $(timestamp)" | tee -a $mail_content
